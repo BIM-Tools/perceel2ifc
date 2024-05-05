@@ -254,6 +254,10 @@
           fetch(url)
             .then((response) => response.json())
             .then((data) => {
+              if (!data.features || data.features.length === 0) {
+                document.body.innerHTML += `<div class="alert alert-warning" role="alert">Geen perceel gevonden</div>`;
+                return;
+              }
               const feature = data.features[0];
               const properties = feature.properties;
               const gemeente = properties.kadastraleGemeenteWaarde;
@@ -338,6 +342,9 @@
               document.body.appendChild(a);
               a.click();
               a.remove();
+            })
+            .catch((error) => {
+              document.body.innerHTML += `<div class="alert alert-danger" role="alert">Fetch error: ${error.message}</div>`;
             });
         });
     </script>
