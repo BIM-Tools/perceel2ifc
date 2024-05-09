@@ -40,6 +40,38 @@
     </div>
 
     <script>
+      // Possible characters in GUID
+      const GUID64 =
+        "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_$";
+
+      // Function to generate a new GUID
+      function newGuid() {
+        // Generate a random UUID
+        let uuid = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+          (
+            c ^
+            (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+          ).toString(16)
+        );
+
+        // Remove dashes
+        uuid = uuid.replace(/-/g, "");
+
+        // Convert UUID to binary
+        let binary = "";
+        for (let i = 0; i < uuid.length; i++) {
+          binary += parseInt(uuid[i], 16).toString(2).padStart(4, "0");
+        }
+
+        // Convert binary to IfcGloballyUniqueId
+        let ifcGuid = GUID64[parseInt(binary.substring(0, 2), 2)];
+        for (let i = 2; i < binary.length; i += 6) {
+          ifcGuid += GUID64[parseInt(binary.substring(i, i + 6), 2)];
+        }
+
+        return ifcGuid;
+      }
+
       function convertToIFCDateTime(jsonDateString) {
         // Manually parse the date string
         let [datePart, timePart] = jsonDateString.split(" ");
@@ -142,13 +174,13 @@
       #29=IFCGEOMETRICREPRESENTATIONCONTEXT($,'Model',3,1.E-05,#27,#28);
       #30=IFCPROJECTEDCRS('EPSG:28992','Netherlands, Amersfoort datum, New System','Amersfoort/b',$,$,$,#19);
       #31=IFCMAPCONVERSION(#29,#30,{{perceelnummerPlaatscoordinaatX}},{{perceelnummerPlaatscoordinaatY}},0.,1.,0.,$);
-      #32=IFCPROJECT('288K_k4KL4jQprvSFlyp5s',#18,'',$,$,'','',(#29),#26);
+      #32=IFCPROJECT('{{guid}}',#18,'',$,$,'','',(#29),#26);
       #33=IFCAXIS2PLACEMENT3D(#3,$,$);
       #34=IFCLOCALPLACEMENT($,#33);
-      #35=IFCSITE('0zDhGXynn8a8$Ps_MF9AhU',#18,'default site',$,$,#34,$,$,.ELEMENT.,$,$,0.,$,$);
+      #35=IFCSITE('{{guid}}',#18,'default site',$,$,#34,$,$,.ELEMENT.,$,$,0.,$,$);
       #36=IFCPROPERTYSINGLEVALUE('TotalArea',$,IFCAREAMEASURE({{kadastraleGrootteWaarde}}),$);
-      #37=IFCPROPERTYSET('07zjzZIcOo4teMyloIN7Kz',#18,'Pset_SiteCommon',$,(#36));
-      #38=IFCRELDEFINESBYPROPERTIES('08jSK_DvdKfv0WEeZnZpjP',#18,$,$,(#35),#37);
+      #37=IFCPROPERTYSET('{{guid}}',#18,'Pset_SiteCommon',$,(#36));
+      #38=IFCRELDEFINESBYPROPERTIES('{{guid}}',#18,$,$,(#35),#37);
       #39=IFCCARTESIANPOINTLIST2D(((-0.1,-0.1),(0.1,-0.1),(0.1,0.1),(-0.1,0.1),(-0.1,-0.1)));
       #40=IFCINDEXEDPOLYCURVE(#39,$,.F.);
       #41=IFCARBITRARYCLOSEDPROFILEDEF(.AREA.,$,#40);
@@ -208,13 +240,13 @@
       #95=IFCSTYLEDITEM(#85,(#88),$);
       #96=IFCSHAPEREPRESENTATION(#29,'Body','SweptSolid',(#44,#53,#59,#66,#72,#78,#85));
       #97=IFCPRODUCTDEFINITIONSHAPE($,$,(#96));
-      #98=IFCVIRTUALELEMENT('2ukNCoJUH9fvgn2$j5Qnes',#18,'GEO-Nulpunt',$,'nulpunt:nulpunt',#34,#97,$);
+      #98=IFCVIRTUALELEMENT('{{guid}}',#18,'GEO-Nulpunt',$,'nulpunt:nulpunt',#34,#97,$);
       #99=IFCPROPERTYSINGLEVALUE('RD-X',$,IFCREAL({{perceelnummerPlaatscoordinaatX}}),$);
       #100=IFCPROPERTYSINGLEVALUE('RD-Y',$,IFCREAL({{perceelnummerPlaatscoordinaatY}}),$);
-      #101=IFCPROPERTYSET('3Wq62pMlkVVh$CarfGO$$c',#18,'CPset_GEO-Nulpunt',$,(#99,#100));
-      #102=IFCRELDEFINESBYPROPERTIES('282PCORz59GxO2W2qfhQE4',#18,$,$,(#98),#101);
-      #103=IFCRELCONTAINEDINSPATIALSTRUCTURE('3qrZQFPbPA9x2zkRBWqV_v',#18,$,$,(#98,#114),#35);
-      #104=IFCRELAGGREGATES('0sdpd7ybR6z3Ol6W1es0OP',#18,$,$,#32,(#35));
+      #101=IFCPROPERTYSET('{{guid}}',#18,'CPset_GEO-Nulpunt',$,(#99,#100));
+      #102=IFCRELDEFINESBYPROPERTIES('{{guid}}',#18,$,$,(#98),#101);
+      #103=IFCRELCONTAINEDINSPATIALSTRUCTURE('{{guid}}',#18,$,$,(#98,#114),#35);
+      #104=IFCRELAGGREGATES('{{guid}}',#18,$,$,#32,(#35));
       #105=IFCPRESENTATIONLAYERASSIGNMENT('GEO-Nulpunt',$,(#96),$);
       #106=IFCCARTESIANPOINTLIST2D({{outerLoop}});
       #107=IFCINDEXEDPOLYCURVE(#106,$,.F.);
@@ -224,7 +256,7 @@
       #111=IFCEXTRUDEDAREASOLID(#108,#110,#9,0.5);
       #112=IFCSHAPEREPRESENTATION(#29,'Body','SweptSolid',(#111));
       #113=IFCPRODUCTDEFINITIONSHAPE($,$,(#112));
-      #114=IFCGEOGRAPHICELEMENT('3NWLgoGnv96eTcBlqbKQ$y',#18,'{{name}}','Kadastraal perceel','perceel',#34,#113,'{{id}}',.TERRAIN.);
+      #114=IFCGEOGRAPHICELEMENT('{{guid}}',#18,'{{name}}','Kadastraal perceel','perceel',#34,#113,'{{id}}',.TERRAIN.);
       #115=IFCPROPERTYSINGLEVALUE('globalid',$,IFCTEXT('{{id}}'),$);
       #116=IFCPROPERTYSINGLEVALUE('identificatie',$,IFCLABEL('{{identificatieNamespace}}.{{identificatieLokaalID}}'),$);
       #117=IFCPROPERTYSINGLEVALUE('namespace',$,IFCIDENTIFIER('{{identificatieNamespace}}'),$);
@@ -245,8 +277,8 @@
       #132=IFCPROPERTYSINGLEVALUE('perceelnummerverschuivingy',$,IFCREAL({{perceelnummerVerschuivingDeltaY}}),$);
       #133=IFCPROPERTYSINGLEVALUE('plaatscoordinatenx',$,IFCREAL({{perceelnummerPlaatscoordinaatX}}),$);
       #134=IFCPROPERTYSINGLEVALUE('plaatscoordinateny',$,IFCREAL({{perceelnummerPlaatscoordinaatY}}),$);
-      #135=IFCPROPERTYSET('3qqc6aJgj8Zx$hEuOkFTce',#18,'CPset_BRK-Perceel',$,(#115,#116,#117,#118,#119,#120,#121,#122,#123,#124,#125,#126,#127,#128,#129,#130,#131,#132,#133,#134));
-      #136=IFCRELDEFINESBYPROPERTIES('282PCORz59GxO2W2qfhQE5',#18,$,$,(#114),#135);
+      #135=IFCPROPERTYSET('{{guid}}',#18,'CPset_BRK-Perceel',$,(#115,#116,#117,#118,#119,#120,#121,#122,#123,#124,#125,#126,#127,#128,#129,#130,#131,#132,#133,#134));
+      #136=IFCRELDEFINESBYPROPERTIES('{{guid}}',#18,$,$,(#114),#135);
       ENDSEC;
 
       END-ISO-10303-21;
@@ -283,6 +315,7 @@
               const fileName = `${name}.ifc`;
 
               const replacements = {
+                "{{guid}}": true,
                 "{{name}}": name,
                 "{{fileName}}": fileName,
                 "{{perceelnummerPlaatscoordinaatX}}":
@@ -323,13 +356,13 @@
                   perceelnummerPlaatscoordinaatY,
               };
 
-              let ifc_data = ifc_template;
-              for (let placeholder in replacements) {
-                ifc_data = ifc_data.replace(
-                  new RegExp(placeholder, "g"),
-                  replacements[placeholder]
-                );
-              }
+              let ifc_data = ifc_template.replace(/{{\w+}}/g, (match) => {
+                if (match === "{{guid}}") {
+                  return newGuid();
+                } else {
+                  return replacements[match];
+                }
+              });
 
               var blob = new Blob([ifc_data], {
                 type: "application/octet-stream",
