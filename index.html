@@ -138,10 +138,10 @@
       #25=IFCCONVERSIONBASEDUNIT(#23,.PLANEANGLEUNIT.,'DEGREE',#24);
       #26=IFCUNITASSIGNMENT((#19,#20,#21,#25));
       #27=IFCAXIS2PLACEMENT3D(#3,$,$);
-      #28=IFCDIRECTION((6.1230317691118863E-17,1.));
+      #28=IFCDIRECTION((0.,1.));
       #29=IFCGEOMETRICREPRESENTATIONCONTEXT($,'Model',3,1.E-05,#27,#28);
       #30=IFCPROJECTEDCRS('EPSG:28992','Netherlands, Amersfoort datum, New System','Amersfoort/b',$,$,$,#19);
-      #31=IFCMAPCONVERSION(#29,#30,{{perceelnummerPlaatscoordinaatX}},{{perceelnummerPlaatscoordinaatY}},0.,1.,6.1230317691118863E-17,$);
+      #31=IFCMAPCONVERSION(#29,#30,{{perceelnummerPlaatscoordinaatX}},{{perceelnummerPlaatscoordinaatY}},0.,1.,0.,$);
       #32=IFCPROJECT('288K_k4KL4jQprvSFlyp5s',#18,'',$,$,'','',(#29),#26);
       #33=IFCAXIS2PLACEMENT3D(#3,$,$);
       #34=IFCLOCALPLACEMENT($,#33);
