@@ -274,28 +274,29 @@ DATA;
 #112=IFCSHAPEREPRESENTATION(#29,'Body','SweptSolid',(#111));
 #113=IFCPRODUCTDEFINITIONSHAPE($,$,(#112));
 #114=IFCGEOGRAPHICELEMENT('{{guid}}',#18,'{{name}}','Kadastraal perceel','perceel',#34,#113,'{{id}}',.TERRAIN.);
-#115=IFCPROPERTYSINGLEVALUE('globalid',$,IFCTEXT('{{id}}'),$);
-#116=IFCPROPERTYSINGLEVALUE('identificatie',$,IFCLABEL('{{identificatieNamespace}}.{{identificatieLokaalID}}'),$);
-#117=IFCPROPERTYSINGLEVALUE('namespace',$,IFCIDENTIFIER('{{identificatieNamespace}}'),$);
-#118=IFCPROPERTYSINGLEVALUE('lokaalid',$,IFCIDENTIFIER('{{identificatieLokaalID}}'),$);
-#119=IFCPROPERTYSINGLEVALUE('begingeldigheid',$,IFCDATETIME('{{beginGeldigheid}}'),$);
-#120=IFCPROPERTYSINGLEVALUE('tijdstipregistratie',$,IFCDATETIME('{{tijdstipRegistratie}}'),$);
-#121=IFCPROPERTYSINGLEVALUE('volgnummer',$,IFCINTEGER({{volgnummer}}),$);
-#122=IFCPROPERTYSINGLEVALUE('statushistorie',$,IFCIDENTIFIER('G'),$);
-#123=IFCPROPERTYSINGLEVALUE('kadastralegemeentecode',$,IFCIDENTIFIER('{{kadastraleGemeenteCode}}'),$);
-#124=IFCPROPERTYSINGLEVALUE('kadastralegemeentewaarde',$,IFCLABEL('{{kadastraleGemeenteWaarde}}'),$);
-#125=IFCPROPERTYSINGLEVALUE('sectie',$,IFCIDENTIFIER('{{sectie}}'),$);
-#126=IFCPROPERTYSINGLEVALUE('perceelnummer',$,IFCINTEGER({{perceelnummer}}),$);
-#127=IFCPROPERTYSINGLEVALUE('akrkadastralegemeentecode',$,IFCLABEL('{{AKRKadastraleGemeenteCodeWaarde}}'),$);
-#128=IFCPROPERTYSINGLEVALUE('kadastralegrootte',$,IFCAREAMEASURE({{kadastraleGrootteWaarde}}),$);
-#129=IFCPROPERTYSINGLEVALUE('soortgrootte',$,IFCIDENTIFIER('{{soortGrootteWaarde}}'),$);
-#130=IFCPROPERTYSINGLEVALUE('perceelnummerrotatie',$,IFCREAL({{perceelnummerRotatie}}),$);
-#131=IFCPROPERTYSINGLEVALUE('perceelnummerverschuivingx',$,IFCREAL({{perceelnummerVerschuivingDeltaX}}),$);
-#132=IFCPROPERTYSINGLEVALUE('perceelnummerverschuivingy',$,IFCREAL({{perceelnummerVerschuivingDeltaY}}),$);
-#133=IFCPROPERTYSINGLEVALUE('plaatscoordinatenx',$,IFCREAL({{perceelnummerPlaatscoordinaatX}}),$);
-#134=IFCPROPERTYSINGLEVALUE('plaatscoordinateny',$,IFCREAL({{perceelnummerPlaatscoordinaatY}}),$);
-#135=IFCPROPERTYSET('{{guid}}',#18,'CPset_BRK-Perceel',$,(#115,#116,#117,#118,#119,#120,#121,#122,#123,#124,#125,#126,#127,#128,#129,#130,#131,#132,#133,#134));
-#136=IFCRELDEFINESBYPROPERTIES('{{guid}}',#18,$,$,(#114),#135);
+#115=IFCPROPERTYSINGLEVALUE('identificatieNamespace',$,IFCIDENTIFIER('{{identificatieNamespace}}'),$);
+#116=IFCPROPERTYSINGLEVALUE('identificatieLokaalID',$,IFCIDENTIFIER('{{identificatieLokaalID}}'),$);
+#117=IFCPROPERTYSINGLEVALUE('beginGeldigheid',$,IFCDATETIME('{{beginGeldigheid}}'),$);
+#118=IFCPROPERTYSINGLEVALUE('tijdstipRegistratie',$,IFCDATETIME('{{tijdstipRegistratie}}'),$);
+#119=IFCPROPERTYSINGLEVALUE('volgnummer',$,IFCINTEGER({{volgnummer}}),$);
+#120=IFCPROPERTYSINGLEVALUE('statusHistorieCode',$,IFCIDENTIFIER('{{statusHistorieCode}}'),$);
+#121=IFCPROPERTYSINGLEVALUE('statusHistorieWaarde',$,IFCLABEL('{{statusHistorieWaarde}}'),$);
+#122=IFCPROPERTYSINGLEVALUE('kadastraleGemeenteCode',$,IFCIDENTIFIER('{{kadastraleGemeenteCode}}'),$);
+#123=IFCPROPERTYSINGLEVALUE('kadastraleGemeenteWaarde',$,IFCLABEL('{{kadastraleGemeenteWaarde}}'),$);
+#124=IFCPROPERTYSINGLEVALUE('sectie',$,IFCIDENTIFIER('{{sectie}}'),$);
+#125=IFCPROPERTYSINGLEVALUE('perceelnummer',$,IFCINTEGER({{perceelnummer}}),$);
+#126=IFCPROPERTYSINGLEVALUE('AKRKadastraleGemeenteCodeCode',$,IFCIDENTIFIER('{{AKRKadastraleGemeenteCodeCode}}'),$);
+#127=IFCPROPERTYSINGLEVALUE('AKRKadastraleGemeenteCodeWaarde',$,IFCLABEL('{{AKRKadastraleGemeenteCodeWaarde}}'),$);
+#128=IFCPROPERTYSINGLEVALUE('kadastraleGrootteWaarde',$,IFCAREAMEASURE({{kadastraleGrootteWaarde}}),$);
+#129=IFCPROPERTYSINGLEVALUE('soortGrootteCode',$,IFCIDENTIFIER('{{soortGrootteCode}}'),$);
+#130=IFCPROPERTYSINGLEVALUE('soortGrootteWaarde',$,IFCLABEL('{{soortGrootteWaarde}}'),$);
+#131=IFCPROPERTYSINGLEVALUE('perceelnummerRotatie',$,IFCREAL({{perceelnummerRotatie}}),$);
+#132=IFCPROPERTYSINGLEVALUE('perceelnummerVerschuivingDeltaX',$,IFCREAL({{perceelnummerVerschuivingDeltaX}}),$);
+#133=IFCPROPERTYSINGLEVALUE('perceelnummerVerschuivingDeltaY',$,IFCREAL({{perceelnummerVerschuivingDeltaY}}),$);
+#134=IFCPROPERTYSINGLEVALUE('perceelnummerPlaatscoordinaatX',$,IFCREAL({{perceelnummerPlaatscoordinaatX}}),$);
+#135=IFCPROPERTYSINGLEVALUE('perceelnummerPlaatscoordinaatY',$,IFCREAL({{perceelnummerPlaatscoordinaatY}}),$);
+#136=IFCPROPERTYSET('{{guid}}',#18,'CPset_BRK-Perceel',$,(#115,#116,#117,#118,#119,#120,#121,#122,#123,#124,#125,#126,#127,#128,#129,#130,#131,#132,#133,#134,#135));
+#137=IFCRELDEFINESBYPROPERTIES('{{guid}}',#18,$,$,(#114),#136);
 ENDSEC;
 
 END-ISO-10303-21;
@@ -312,17 +313,12 @@ END-ISO-10303-21;
 
               const feature = data.features[0];
               const properties = feature.properties;
-              const gemeente = properties.kadastraleGemeenteWaarde;
-              const sectie = properties.sectie;
               const perceelnummer = properties.perceelnummer;
               const perceelnummerPlaatscoordinaatX = formatNumberForIFC(
                 properties.perceelnummerPlaatscoordinaatX
               );
               const perceelnummerPlaatscoordinaatY = formatNumberForIFC(
                 properties.perceelnummerPlaatscoordinaatY
-              );
-              const kadastraleGrootteWaarde = formatNumberForIFC(
-                properties.kadastraleGrootteWaarde
               );
               const outerLoop = convertGeoJSONToIFC(
                 feature.geometry.coordinates,
@@ -331,7 +327,7 @@ END-ISO-10303-21;
                   properties.perceelnummerPlaatscoordinaatY,
                 ]
               );
-              const name = `Perceel-${gemeente}-${sectie}${perceelnummer}`;
+              const name = `Perceel-${properties.kadastraleGemeenteWaarde}-${properties.sectie}${properties.perceelnummer}`;
               const fileName = `${name}.ifc`;
 
               const replacements = {
@@ -344,7 +340,9 @@ END-ISO-10303-21;
                   perceelnummerPlaatscoordinaatX,
                 "{{perceelnummerPlaatscoordinaatY}}":
                   perceelnummerPlaatscoordinaatY,
-                "{{kadastraleGrootteWaarde}}": kadastraleGrootteWaarde,
+                "{{kadastraleGrootteWaarde}}": formatNumberForIFC(
+                  properties.kadastraleGrootteWaarde
+                ),
                 "{{outerLoop}}": outerLoop,
                 "{{id}}": feature.id,
                 "{{identificatieNamespace}}": properties.identificatieNamespace,
@@ -356,13 +354,18 @@ END-ISO-10303-21;
                   properties.tijdstipRegistratie
                 ),
                 "{{volgnummer}}": properties.volgnummer,
+                "{{statusHistorieCode}}": properties.statusHistorieCode,
+                "{{statusHistorieWaarde}}": properties.statusHistorieWaarde,
                 "{{kadastraleGemeenteCode}}": properties.kadastraleGemeenteCode,
                 "{{kadastraleGemeenteWaarde}}":
                   properties.kadastraleGemeenteWaarde,
                 "{{sectie}}": properties.sectie,
-                "{{perceelnummer}}": perceelnummer,
+                "{{perceelnummer}}": properties.perceelnummer,
+                "{{AKRKadastraleGemeenteCodeCode}}":
+                  properties.AKRKadastraleGemeenteCodeCode,
                 "{{AKRKadastraleGemeenteCodeWaarde}}":
                   properties.AKRKadastraleGemeenteCodeWaarde,
+                "{{soortGrootteCode}}": properties.soortGrootteCode,
                 "{{soortGrootteWaarde}}": properties.soortGrootteWaarde,
                 "{{perceelnummerRotatie}}": formatNumberForIFC(
                   properties.perceelnummerRotatie
