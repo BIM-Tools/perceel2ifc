@@ -9,15 +9,17 @@
   </head>
   <body>
     <div class="container">
-      <form id="myForm">
-        <h3>Download Kadastraal Perceel als IFC4</h3>
+      <form id="form">
+        <h3>Download Kadastraal Perceel als IFC</h3>
+        <p>Als een handige IFC4 project start MET correcte RD geolocatie</p>
+        <h4>Kadastraal perceel</h4>
         <div class="form-group">
           <label for="kadastraleGemeenteWaarde">Kadastrale Gemeente</label>
           <input
             type="text"
             class="form-control"
             id="kadastraleGemeenteWaarde"
-            value="Jutphaas"
+            value="Amersfoort"
           />
         </div>
         <div class="form-group">
@@ -30,8 +32,21 @@
             type="text"
             class="form-control"
             id="perceelnummer"
-            value="3840"
+            value="7738"
           />
+        </div>
+        <h4>Project informatie (optioneel)</h4>
+        <div class="form-group">
+          <label for="projectName">Project naam</label>
+          <input type="text" class="form-control" id="projectName" />
+        </div>
+        <div class="form-group">
+          <label for="projectDescription">Project omschrijving</label>
+          <input type="text" class="form-control" id="projectDescription" />
+        </div>
+        <div class="form-group">
+          <label for="projectLongName">Uitgebreide naam (voor referentiedoeleinden)</label>
+          <input type="text" class="form-control" id="projectLongName" />
         </div>
         <button type="button" class="btn btn-primary" id="downloadButton">
           Download
@@ -145,6 +160,11 @@
           ).value;
           var sectie = document.getElementById("sectie").value;
           var perceelnummer = document.getElementById("perceelnummer").value;
+          var projectName = document.getElementById("projectName").value;
+          var projectDescription =
+            document.getElementById("projectDescription").value;
+          var projectLongName =
+            document.getElementById("projectLongName").value;
 
           var filter = `<Filter><And><PropertyIsEqualTo><PropertyName>kadastraleGemeenteWaarde</PropertyName><Literal>${kadastraleGemeenteWaarde}</Literal></PropertyIsEqualTo><PropertyIsEqualTo><PropertyName>sectie</PropertyName><Literal>${sectie}</Literal></PropertyIsEqualTo><PropertyIsEqualTo><PropertyName>perceelnummer</PropertyName><Literal>${perceelnummer}</Literal></PropertyIsEqualTo></And></Filter>`;
           var encodedFilter = encodeURIComponent(filter);
@@ -191,7 +211,7 @@ DATA;
 #29=IFCGEOMETRICREPRESENTATIONCONTEXT($,'Model',3,1.E-05,#27,#28);
 #30=IFCPROJECTEDCRS('EPSG:28992','Netherlands, Amersfoort datum, New System','Amersfoort/b',$,$,$,#19);
 #31=IFCMAPCONVERSION(#29,#30,{{perceelnummerPlaatscoordinaatX}},{{perceelnummerPlaatscoordinaatY}},0.,1.,0.,$);
-#32=IFCPROJECT('{{guid}}',#18,'',$,$,'','',(#29),#26);
+#32=IFCPROJECT('{{guid}}',#18,'{{projectName}}','{{projectDescription}}',$,'{{projectLongName}}',$,(#29),#26);
 #33=IFCAXIS2PLACEMENT3D(#3,$,$);
 #34=IFCLOCALPLACEMENT($,#33);
 #35=IFCSITE('{{guid}}',#18,'default site',$,$,#34,$,$,.ELEMENT.,$,$,0.,$,$);
@@ -332,6 +352,9 @@ END-ISO-10303-21;
 
               const replacements = {
                 "{{guid}}": true,
+                "{{projectName}}": projectName,
+                "{{projectDescription}}": projectDescription,
+                "{{projectLongName}}": projectLongName,
                 "{{nowDateTime}}": generateIFCNowDateTime(now),
                 "{{nowTimeStamp}}": generateIFCNowTimeStamp(now),
                 "{{name}}": name,
