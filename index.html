@@ -263,7 +263,7 @@ DATA;
 #27=IFCAXIS2PLACEMENT3D(#3,$,$);
 #28=IFCDIRECTION((0.,1.));
 #29=IFCGEOMETRICREPRESENTATIONCONTEXT($,'Model',3,1.E-05,#27,#28);
-#30=IFCPROJECTEDCRS('EPSG:28992','Netherlands, Amersfoort datum, New System','Amersfoort/b',$,$,$,#19);
+#30=IFCPROJECTEDCRS('EPSG:28992','Amersfoort / RD New','Amersfoort',$,$,$,#19);
 #31=IFCMAPCONVERSION(#29,#30,{{perceelnummerPlaatscoordinaatX}},{{perceelnummerPlaatscoordinaatY}},0.,1.,0.,$);
 #32=IFCPROJECT('{{guid}}',#18,'{{projectName}}','{{projectDescription}}',$,'{{projectLongName}}',$,(#29),#26);
 #33=IFCAXIS2PLACEMENT3D(#3,$,$);
